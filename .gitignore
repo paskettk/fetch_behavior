@@ -1,0 +1,20 @@
+# Catkin build artifacts (if someone accidentally builds in this folder)
+build/
+devel/
+install/
+.msgsrv/
+.catkin_tools/
+
+# Python cache
+*.pyc
+__pycache__/
+
+# Logs and temporary files
+*.log
+*.swp
+*.swo
+*.DS_Store
+
+# IDE/editor configs (optional, but recommended)
+.vscode/
+.idea/
