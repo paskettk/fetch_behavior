@@ -1,0 +1,3 @@
+<launch>
+  <node pkg="fetch_behavior" type="demo_task.py" name="demo_task" output="screen"/>
+</launch>
