@@ -30,16 +30,18 @@ class FetchBehavior:
         else:
             rospy.logwarn("Unknown command.")
 
-    def wave(self):
-        pose = self.arm.get_current_pose().pose
-        pose.position.y += 0.2
-        self.arm.set_pose_target(pose)
-        self.arm.go(wait=True)
-        rospy.sleep(1)
-        pose.position.y -= 0.2
-        self.arm.set_pose_target(pose)
-        self.arm.go(wait=True)
-        rospy.loginfo("Waved arm.")
+def wave(self):
+    pose = self.arm.get_current_pose().pose
+    pose.position.y += 0.2
+    self.arm.set_pose_target(pose)
+
+    plan = self.arm.plan()
+    if len(plan.joint_trajectory.points) == 0:
+        rospy.logwarn("No plan found for wave motion")
+        return
+
+    self.arm.execute(plan, wait=True)
+    rospy.loginfo("Waved arm.")
 
     def open_gripper(self):
         self.gripper.set_named_target("open")
